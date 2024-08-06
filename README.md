@@ -19,3 +19,24 @@ learning react🫥
 -can also host in https
 -Tree Shaking (remove unused code )
 
+
+
+/**
+ * header
+ *  -logo
+ *  -Nav Items
+ * Body
+ *  -Search
+ *  -RestaurantContainer
+ *  -restaurantCard
+ *      -image
+ *      -name of res, Star Rating, Cuisine, delery time
+ *      -
+ * Footer
+ *  -Copyright
+ *  -Links
+ *  -Address
+ *  -Contact
+ * 
+*/
+
