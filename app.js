@@ -2079,16 +2079,17 @@ const Header=()=>{
     )
 }
 const RestaurantCard= (props)=>{
-    console.log(props)
+    // console.log(props)
     const {resData} =props
-    console.log(resData);
+    // console.log(resData);
     const {
       cloudinaryImageId,
       name,
       cuisines,
       avgRating,
-      minDeliveryTime
-    } =resData?.data
+      costForTwo,
+      deliveryTime,
+    } = resData?.data;
     
     return(
         <div className="res-card" style={{backgroundColor:"#f0f0f0"}}>
@@ -2096,10 +2097,11 @@ const RestaurantCard= (props)=>{
             src={
               'https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/'+cloudinaryImageId
             }/>
-            <h3>{name}</h3>
-            <h4>{cuisines.join(', ')}</h4>
-            <h4>{avgRating}</h4>
-            <h4>{minDeliveryTime}</h4>
+          <h3>{name}</h3>
+          <h4>{cuisines.join(', ')}</h4>
+          <h4>{avgRating} stars</h4>
+          <h4>₹{costForTwo / 100} FOR TWO</h4>
+          <h4>{deliveryTime} minutes</h4>
         </div>
     )
 }
