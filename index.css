@@ -24,7 +24,8 @@
     margin:5px;
     width:200px;
     padding: 5px;
-    /* height:400px; */
+    /* height:400px; */ 
+    /* will be adjust automatically */
 
 }
 .res-card:hover{
@@ -43,3 +44,19 @@
 .res-logo{
     width:100%;
 }
+
+.shimmer-card{
+    margin:20px;
+    width:200px;
+    padding: 5px;
+    height: 400px; 
+    /* no content no height */
+    background-color:#f0f0f0 ;
+
+}
+.shimmer-container{
+    display: flex;
+    flex-wrap: wrap;
+
+}
+/* if i dont provide height it will adjust according to content nut if there is no content then there will be no height */
