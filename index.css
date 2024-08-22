@@ -59,4 +59,9 @@
     flex-wrap: wrap;
 
 }
-/* if i dont provide height it will adjust according to content nut if there is no content then there will be no height */
+.filter{
+    display:flex;
+    flex-wrap: wrap;
+}
+
+/* if i don't provide height it will adjust according to content nut if there is no content then there will be no height */
