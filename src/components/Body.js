@@ -5,6 +5,10 @@ import { useEffect, useState } from "react"
 import Shimmer from './Shimmer'
 import { Link } from "react-router-dom"
 
+import useOnlineStatus from "../utils/useOnlineStatus";
+
+
+
 const Body = ()=>{
     const [listOfRestaurant,setListOfRestaurant]= useState([])
     // same as
@@ -13,6 +17,8 @@ const Body = ()=>{
     // const setListOfRestaurant = arr[1] 
 
     const [filterRestaurant, setFilterRestaurant] = useState([])
+
+    const onlineStatus = useOnlineStatus()
 
     const [searchText, setSearchText]= useState('')  // we will bind the text in the search box input value to this variable
     console.log('re-rendering')
@@ -40,17 +46,18 @@ const Body = ()=>{
     //     return <Shimmer />
     // }
     
-    
+    if(onlineStatus == false) return <h1> YOU ARE OFFLINE 💀</h1>
+
     return listOfRestaurant.length == 0 ? ( 
     <Shimmer /> 
 ) : (
         < div className="body">
-            <div className="filter">
-                <div className="search">
-                    <input type="text" className="searchBox" value={searchText} onChange={(e)=>{
+            <div className="filter flex">
+                <div className="search m-4 p-4">
+                    <input type="text" placeholder="Search..." className="searchBox border border-solid rounded-md border-black" value={searchText} onChange={(e)=>{
                         setSearchText(e.target.value)
                     }}></input>
-                    <button className="searchBtn" onClick={()=>{
+                    <button className="px-4 py-2 bg-green-100 m-4 rounded-lg" onClick={()=>{
                         // console.log(searchText)
                         
                         let FilteredRestaurants = listOfRestaurant.filter((res)=>
@@ -60,16 +67,18 @@ const Body = ()=>{
                         
                     }}>Search</button>
                 </div>
-                <button className="filter-btn" onClick={()=>{
-
-                    let filteredList = listOfRestaurant.filter(
-                        (resData)=> resData.info.avgRating > 4.2
-                    );
-                    setFilterRestaurant(filteredList)
-                }}
-            >Filter Restaurant</button>
+                <div className="search m-4 p-4 flex items-center">
+                    <button className="px-2 py-1 bg-gray-100 m-4 rounded-lg" onClick={()=>{
+                        
+                        let filteredList = listOfRestaurant.filter(
+                            (resData)=> resData.info.avgRating > 4.2
+                        );
+                        setFilterRestaurant(filteredList)
+                    }}
+                    >Filter Restaurant</button>
+                </div>
             </div>
-            <div className="res-container">
+            <div className="flex flex-wrap ">
                 {filterRestaurant.length > 0 ? (
                     filterRestaurant.map((resData) => {
                         return (
