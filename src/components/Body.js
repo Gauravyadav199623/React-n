@@ -1,4 +1,4 @@
-import RestaurantCard from "./RestaurantCard"
+import RestaurantCard,{withPromtedLabel} from "./RestaurantCard"
 
 import { useEffect, useState } from "react"
 
@@ -21,7 +21,9 @@ const Body = ()=>{
     const onlineStatus = useOnlineStatus()
 
     const [searchText, setSearchText]= useState('')  // we will bind the text in the search box input value to this variable
-    console.log('re-rendering')
+
+    const RestaurantCardPromoted = withPromtedLabel(RestaurantCard)
+    console.log('re-rendering',listOfRestaurant)
 
     // * Whenever a state variable updates or changes, react triggers a reconciliation cycle(re-renders the component)
 
@@ -83,7 +85,12 @@ const Body = ()=>{
                     filterRestaurant.map((resData) => {
                         return (
                             <Link key={resData.info.id} to={"/restaurants/" + resData.info.id}>
-                                <RestaurantCard resData={resData.info} />
+                                {resData.info.avgRating >= 4.4 ? (
+                                    <RestaurantCardPromoted resData={resData.info} /> 
+                                ) :( 
+                                    <RestaurantCard resData={resData.info} />
+                                ) }
+                                
                             </Link>
                         );
                     })
