@@ -1,6 +1,5 @@
 import { CDN_URL } from '../utils/constants';
 
-//accordion
 const ItemList = ({ items, dummy }) => {
 
   return (
