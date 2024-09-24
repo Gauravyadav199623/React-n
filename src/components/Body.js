@@ -1,11 +1,13 @@
-import RestaurantCard,{withPromtedLabel} from "./RestaurantCard"
+import RestaurantCard,{withPromotedLabel} from "./RestaurantCard"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 
 import Shimmer from './Shimmer'
 import { Link } from "react-router-dom"
 
 import useOnlineStatus from "../utils/useOnlineStatus";
+
+import UserContext from "../utils/UserContext";
 
 
 
@@ -22,7 +24,7 @@ const Body = ()=>{
 
     const [searchText, setSearchText]= useState('')  // we will bind the text in the search box input value to this variable
 
-    const RestaurantCardPromoted = withPromtedLabel(RestaurantCard)
+    const RestaurantCardPromoted = withPromotedLabel(RestaurantCard)
     console.log('re-rendering',listOfRestaurant)
 
     // * Whenever a state variable updates or changes, react triggers a reconciliation cycle(re-renders the component)
@@ -49,6 +51,8 @@ const Body = ()=>{
     // }
     
     if(onlineStatus == false) return <h1> YOU ARE OFFLINE 💀</h1>
+
+    const {loggedInUser, setUserName} = useContext(UserContext) 
 
     return listOfRestaurant.length == 0 ? ( 
     <Shimmer /> 
@@ -77,7 +81,15 @@ const Body = ()=>{
                         );
                         setFilterRestaurant(filteredList)
                     }}
-                    >Filter Restaurant</button>
+                    >
+                        Filter Restaurant
+                    </button>
+                </div>
+                <div className="search m-4 p-4 flex items-center">
+                    <label>User Name:</label>
+                    <input className="border border-black p-2" 
+                    value={loggedInUser}
+                    onChange={(e) => setUserName(e.target.value)} />
                 </div>
             </div>
             <div className="flex flex-wrap ">
