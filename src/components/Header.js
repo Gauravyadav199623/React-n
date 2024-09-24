@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 import useOnlineStatus from "../utils/useOnlineStatus"
 import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
 
 
 const Header=()=>{
@@ -12,7 +13,11 @@ const Header=()=>{
     const [btnNameReact, setBtNameReact] = useState('Login');
 
     const {loggedInUser} = useContext(UserContext)
-    console.log(loggedInUser);
+    // console.log(loggedInUser);
+
+    //? here We are subscribing to the store using a selector(reading the store) 
+    const cartItems = useSelector((store) => store.cart.items)
+    console.log(cartItems);
 
     // console.log("Header Render")
 
@@ -34,7 +39,12 @@ const Header=()=>{
           </li>
                     <li className="p-2"><Link to="/about">About us</Link></li>
                     <li className="p-2"><Link to="/grocery">Grocery</Link></li>
-                    <li className="p-2">Cart</li>
+                    <li className="p-2 font-bold">
+                        <Link to='/cart'>
+                        Cart({cartItems.length})
+                        </Link>
+                        </li>
+
                     <button className="Login" onClick={()=>{
                         btnNameReact == 'login' 
                         ? setBtNameReact('logout')
