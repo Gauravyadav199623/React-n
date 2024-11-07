@@ -12,6 +12,9 @@ import UserContext from "../utils/UserContext";
 
 
 const Body = ()=>{
+    
+  // * React Hook -> A normal JavaScript function which is given to us by React (or) Normal JS utility functions
+  // * useState() - Super Powerful variable
     const [listOfRestaurant,setListOfRestaurant]= useState([])
     // same as
     // const arr = useState(resList)
@@ -25,7 +28,7 @@ const Body = ()=>{
     const [searchText, setSearchText]= useState('')  // we will bind the text in the search box input value to this variable
 
     const RestaurantCardPromoted = withPromotedLabel(RestaurantCard)
-    console.log('re-rendering',listOfRestaurant)
+    // console.log('re-rendering',listOfRestaurant)
 
     // * Whenever a state variable updates or changes, react triggers a reconciliation cycle(re-renders the component)
 
@@ -39,7 +42,7 @@ const Body = ()=>{
         const json= await data.json();
 
     //    optional chaining
-        console.log(json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants,"fetchData")
+        // console.log(json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants,"fetchData")
         // console.log(json.data.cards[4])
         setListOfRestaurant(json.data.cards[4].card?.card?.gridElements?.infoWithStyle?.restaurants)
         setFilterRestaurant(json.data.cards[4].card?.card?.gridElements?.infoWithStyle?.restaurants)
@@ -60,7 +63,10 @@ const Body = ()=>{
         < div className="body">
             <div className="filter flex">
                 <div className="search m-4 p-4">
-                    <input type="text" placeholder="Search..." className="searchBox border border-solid rounded-md border-black" value={searchText} onChange={(e)=>{
+                    <input 
+                    type="text" 
+                    data-testid = "searchInput"
+                    placeholder="Search..." className="searchBox border border-solid rounded-md border-black" value={searchText} onChange={(e)=>{
                         setSearchText(e.target.value)
                     }}></input>
                     <button className="px-4 py-2 bg-green-100 m-4 rounded-lg" onClick={()=>{
@@ -93,6 +99,7 @@ const Body = ()=>{
                 </div>
             </div>
             <div className="flex flex-wrap ">
+                {/* looping through the <RestaurantCard /> components Using Array.map() method  */}
                 {filterRestaurant.length > 0 ? (
                     filterRestaurant.map((resData) => {
                         return (

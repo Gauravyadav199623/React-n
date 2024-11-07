@@ -17,7 +17,7 @@ const Header=()=>{
 
     //? here We are subscribing to the store using a selector(reading the store) 
     const cartItems = useSelector((store) => store.cart.items)
-    console.log(cartItems);
+    // console.log(cartItems);
 
     // console.log("Header Render")
 
@@ -46,10 +46,10 @@ const Header=()=>{
                         </li>
 
                     <button className="Login" onClick={()=>{
-                        btnNameReact == 'login' 
-                        ? setBtNameReact('logout')
-                        : setBtNameReact("login")
-                        console.log(btnNameReact)
+                        btnNameReact == 'Login' 
+                        ? setBtNameReact('Logout')
+                        : setBtNameReact("Login")
+                        // console.log(btnNameReact)
                     }}
                     >
                         {btnNameReact}
